@@ -7,7 +7,7 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT
-        this.usuariosPath = '/api/notes';
+        this.tasksPath = '/api/tasks';
 
         // Conectar a DB
         this.conectarDB();
@@ -26,15 +26,13 @@ class Server {
             await mongoose.connect( process.env.MONGODB_CNN, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
-                // useCreateIndex: true,
-                // useFindAndModify: false
             });
     
-            console.log("Base de datos online");
+            console.log("Database online");
     
         } catch (error) {
             console.log(error);
-            throw new Error('Error en la conexión la base de datos');
+            throw new Error('Error while attempting conection with the database');
         }
 
     }
@@ -44,19 +42,19 @@ class Server {
         // CORS
         this.app.use( cors() );
 
-        // Lectura y parseo del body
+        // Reads and parse the body
         this.app.use( express.json() );
 
     }
 
     routes() {
         
-        this.app.use( this.usuariosPath, require("../routes/notes") );
+        this.app.use( this.tasksPath, require("../routes/tasks") );
     }
 
     listen() {
         this.app.listen( this.port, () => {
-            console.log(`Servidor corriendo en puerto ${ this.port }`);
+            console.log(`Server running on port ${ this.port }`);
         });
     }
 

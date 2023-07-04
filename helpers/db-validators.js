@@ -1,4 +1,4 @@
-const Note = require('../models/notes');
+const Note = require('../models/task');
 
 const noteExistsById = async( id ) => {
     const noteExists = await Note.findById( id );

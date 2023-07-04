@@ -1,5 +1,5 @@
 
-const Note = require( "../models/notes" );
+const Task = require( "../models/task" );
 
 const getNotesByState = async( req, res ) => {
 
